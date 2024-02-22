@@ -1,0 +1,74 @@
+{% extends "master.html" %}
+
+{% load static %}
+
+{% block title %}
+  Extraction des données
+{% endblock %}
+
+{% block content %}
+<div class="extract_body">
+    <div class="mt-5">
+        <h1 class="mb-5 "> Extraire les données de votre Facture</h1>
+    </div>
+
+    
+        <div class="mb-4 fs-4 "> Les données de la facture </div>
+
+        <div class="row justify-content-between  w-100  mx-5 flex-wrap gap-3 text-white ">
+        <div class="w-25 ">ID: <span class="fw-bold  ">{{les_factures.facture_ID}}</span></div>
+        <div class="w-25 ">Type_facture: <span class="fw-bold">{{les_factures.type_facture}}</span></div>
+        <div class="w-25 ">Prestataire: <span class="fw-bold">{{les_factures.emetteur}}</span></div>
+        <div class="w-25 ">Mail: <span class="fw-bold"></span>{{les_factures.mail_emetteur}}</span></div>
+        <div class="w-25 ">Date d'émission: <span class="fw-bold">{{les_factures.date_emission}}</span></div>
+        <div class="w-25 ">Date d'échéance: <span class="fw-bold">{{les_factures.date_echeance}}</span></div>
+        <div class="w-25 ">Conditions: <span class="fw-bold">{{les_factures.conditions}}</span></div>
+        <div class="w-25 ">Total: <span class="fw-bold">{{les_factures.total}} FCFA</span></div>
+        </div>
+     
+        <br/> <br/>
+        <div class="produits">
+            <div class="mb-4 fs-4 text-white">Les produits</div>
+            <a href="{% url 'export_to_excel' les_factures.facture_ID %}">
+                
+                Download
+            </a>
+        </div>
+        
+     
+        <div class="mx-lg-3 text-white ">
+            <table class="table text-white">
+                <thead>
+                <tr class="text-black ">
+                    <th scodive="col">Nom</th>
+                    <th scodive="col">Quantité</th>
+                    <th scodive="col">Prix unitaire</th>
+                    <th scodive="col">Somme partielle</th>
+                    <th scodive="col">Facture ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% if les_produits %}
+    
+                        {% for produit in les_produits %}
+                            <tr>
+                                <th scodive="row">{{produit.nom}}</th>
+                                <td>{{produit.quantite}}</td>
+                                <td>{{produit.prix_unitaire}} FCfA</td>
+                                <td>{{produit.somme}} FCFA</td>
+                                <td>{{produit.codeProduit}}</td>
+                            </tr>
+    
+                        {% endfor %}
+    
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    
+    
+    
+{% endblock %}

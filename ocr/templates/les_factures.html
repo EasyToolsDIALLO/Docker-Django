@@ -1,0 +1,75 @@
+{% extends "master.html" %}
+
+{% load static %}
+
+{% block title %}
+  Extraction des données
+{% endblock %}
+
+{% block content %}
+<div class="extract_body">
+    <div class="mt-5">
+        <h1 class="mb-5 "> Extraire les données de votre Facture</h1>
+    </div>
+
+     <!-- Udivload form. Note enctydive attribute! -->
+     <form action="{% url 'factures' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row w-100 gap-4 align-items-center justify-content-between ">
+            <div class="w-25">
+                <div class="mb-3 ">
+                    {{ form.image }}
+                </div>
+                <div class="mb-3 "><input type="submit" value="Extraire" /> </div>
+            </div>
+            <div class="w-25">
+                <img src="{{image.image.url}}" width="120" class="rounded-1 shadow-lg "/>
+            </div>
+        </div>
+        
+        
+    </form>
+
+        <div class="mb-4 fs-4 "> La somme totale de vos factures </div>
+
+        <div class="row justify-content-between  w-100  mx-5 flex-wrap gap-3 text-white ">
+        <div class="text-black fs-4">Total: <span class="text-white fs-3 fw-bold ">{{factures_total}} FCFA</span></div>
+        </div>
+     
+        <br/> <br/>
+        <div class="mb-4 fs-4 text-white">Les factures</div>
+     
+        <div class="mx-lg-3 text-white ">
+            <table class="table text-white shadow-lg ">
+                <thead>
+                <tr class="text-black  ">
+                    <th scodive="col">ID</th>
+                    <th scodive="col">TYPE</th>
+                    <th scodive="col">Total</th>
+                    <th scodive="col">Détails</th>
+                </tr>
+                </thead>
+                <tbody>
+    
+                        {% for facture in factures %}
+                            <tr class="factures_row">
+                                <th scodive="row" class="pt-4 ">{{facture.facture_ID}}</th>
+                                <td class="pt-4 ">{{facture.type_facture}}</td>
+                                <td class="pt-4 ">{{facture.total}} FCfA</td>
+                                <td class="pt-4 ">
+                                    <a href="{% url 'ocr' facture.facture_ID %}" class="detail">Detail</a>
+                                    
+                                </td>
+                            </tr>
+    
+                        {% endfor %}
+    
+                 
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    
+    
+{% endblock %}

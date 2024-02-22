@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+
+{% load static %}
+
+{% block title %}
+  Home
+{% endblock %}
+
+
+{% block content %}
+<div class="home_body">
+    <div class="home_body_content">
+        <p class="home_title">Bienvenu à OCR Bakeli</p>
+        <div class="envelopper_logo">
+          <img src="{% static 'images/bakeli_logo.png' %}" alt="Logo de Bakeli"/>
+        </div>
+        
+        <p class="home_subtitle">Obtenez facilement et rapidement vos données de facture</p>
+        <a href="{% url 'factures' %}" class="home_continuer">Continuer</a>
+    </div>
+</div>
+
+{% endblock %}
